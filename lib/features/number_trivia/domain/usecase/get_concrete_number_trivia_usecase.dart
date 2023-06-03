@@ -6,7 +6,7 @@ import 'package:samplenumber/features/number_trivia/domain/entity/number_trivia.
 
 import '../../../../core/error/failure.dart';
 import '../mapper.dart';
-import '../repository/NumberTriviaRepository.dart';
+import '../repository/number_trivia_repository.dart';
 
 class GetConcreteNumberTriviaUsecase
     extends Usecase<NumberTrivia, ConcreteNumberTriviaParam> {
