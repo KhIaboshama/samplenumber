@@ -8,3 +8,8 @@ class GetConcreteNumberEvent extends NumberTriviaEvent {
 
   GetConcreteNumberEvent({required this.number});
 }
+
+class GetRandomNumberEvent extends NumberTriviaEvent {
+
+  GetRandomNumberEvent();
+}

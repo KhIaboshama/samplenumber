@@ -20,4 +20,14 @@ class NumberTriviaRepositoryImpl extends NumberTriviaRepository {
     }
   }
 
+  @override
+  Future<Either<NumberTriviaModel, Exception>> getRandomNumberTrivia() async {
+    final response = await remoteDataSource.getRandomNumberTrivia();
+    if (response.isLeft) {
+      return Left(response.left);
+    } else {
+      return Right(response.right);
+    }
+  }
+
 }

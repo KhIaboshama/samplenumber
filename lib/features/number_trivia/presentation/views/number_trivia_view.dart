@@ -42,58 +42,64 @@ class _NumberTriviaViewState extends State<NumberTriviaView> {
         });
       },
       child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        appBar: AppBar(
-          title: const Text('Number trivia'),
-        ),
-        body: SingleChildScrollView(
-          child:  Column(
-            children: [
-              Container(
-                margin: EdgeInsetsDirectional.only(top: 20.h),
-                child: getHeaderWidget(),
-              ),
-              Container(
-                margin:
-                EdgeInsetsDirectional.only(top: 10.h, start: 5.w, end: 5.w),
-                child: TextField(
-                  controller: controller,
-                  decoration: const InputDecoration(hintText: 'Input number'),
-                ),
-              ),
-              Container(
-                alignment: Alignment.topCenter,
-                margin: EdgeInsetsDirectional.only(top: 5.h),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsetsDirectional.only(start: 5.w, end: 2.w),
-                        child: TextButton(
-                          onPressed: () {
-                            context.read<NumberTriviaBloc>().add(GetConcreteNumberEvent(number: controller.text));
-                          },
-                          child: const Text('search'),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsetsDirectional.only(start: 2.w, end: 5.w),
-                        child: TextButton(
-                          onPressed: () {},
-                          child: const Text('Random Number'),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          resizeToAvoidBottomInset: true,
+          appBar: AppBar(
+            title: const Text('Number trivia'),
           ),
-        )
-
-      ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsetsDirectional.only(top: 20.h),
+                  child: getHeaderWidget(),
+                ),
+                Container(
+                  margin: EdgeInsetsDirectional.only(
+                      top: 10.h, start: 5.w, end: 5.w),
+                  child: TextField(
+                    controller: controller,
+                    decoration: const InputDecoration(hintText: 'Input number'),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.topCenter,
+                  margin: EdgeInsetsDirectional.only(top: 5.h),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin:
+                              EdgeInsetsDirectional.only(start: 5.w, end: 2.w),
+                          child: TextButton(
+                            onPressed: () {
+                              context.read<NumberTriviaBloc>().add(
+                                  GetConcreteNumberEvent(
+                                      number: controller.text));
+                            },
+                            child: const Text('search'),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin:
+                              EdgeInsetsDirectional.only(start: 2.w, end: 5.w),
+                          child: TextButton(
+                            onPressed: () {
+                              context
+                                  .read<NumberTriviaBloc>()
+                                  .add(GetRandomNumberEvent());
+                            },
+                            child: const Text('Random Number'),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )),
     );
   }
 
