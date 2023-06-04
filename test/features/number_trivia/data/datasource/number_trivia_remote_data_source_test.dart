@@ -9,6 +9,7 @@ import 'package:samplenumber/features/number_trivia/data/model/number_trivia_mod
 
 import 'number_trivia_remote_data_source_test.mocks.dart';
 
+
 class MockNumberTriviaRemoteDataSource extends Mock
     implements NumberTriviaRemoteDataSource {}
 
