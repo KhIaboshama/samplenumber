@@ -50,7 +50,7 @@ class _NumberTriviaViewState extends State<NumberTriviaView> {
           child:  Column(
             children: [
               Container(
-                margin: EdgeInsetsDirectional.only(top: 10.h),
+                margin: EdgeInsetsDirectional.only(top: 20.h),
                 child: getHeaderWidget(),
               ),
               Container(
