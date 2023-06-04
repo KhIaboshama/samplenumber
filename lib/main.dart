@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:samplenumber/features/number_trivia/data/datasource/number_trivia_remote_data_source.dart';
-import 'package:samplenumber/features/number_trivia/data/repository_impl/number_trivia_repository_impl.dart';
+import 'package:samplenumber/di/injection_container.dart';
 import 'package:sizer/sizer.dart';
 
 import 'features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
 import 'features/number_trivia/presentation/views/number_trivia_view.dart';
 
 void main() {
+  init();
   runApp(const MyApp());
 }
 
@@ -34,9 +34,8 @@ class MyApp extends StatelessWidget {
              primarySwatch: Colors.blue,
            ),
            home: BlocProvider(
-             create: (context) => NumberTriviaBloc(NumberTriviaRepositoryImpl(
-                 remoteDataSource: NumberTriviaRemoteDataSourceImpl())),
-             child: NumberTriviaView(),
+             create: (context) => serviceLocator<NumberTriviaBloc>(),
+             child: const NumberTriviaView(),
            ),
          );
       },
