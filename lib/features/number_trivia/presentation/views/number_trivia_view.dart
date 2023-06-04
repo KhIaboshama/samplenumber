@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:samplenumber/features/number_trivia/data/datasource/number_trivia_remote_data_source.dart';
-import 'package:samplenumber/features/number_trivia/domain/repository/number_trivia_repository.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../data/repository_impl/number_trivia_repository_impl.dart';
 import '../bloc/number_trivia_bloc.dart';
 
 class NumberTriviaView extends StatefulWidget {
@@ -15,8 +12,6 @@ class NumberTriviaView extends StatefulWidget {
 }
 
 class _NumberTriviaViewState extends State<NumberTriviaView> {
-  final NumberTriviaRepository repository = NumberTriviaRepositoryImpl(
-      remoteDataSource: NumberTriviaRemoteDataSourceImpl());
 
   String header = 'Starting search';
   TextEditingController controller = TextEditingController();

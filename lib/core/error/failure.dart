@@ -12,4 +12,9 @@ class CacheFailure extends Failure {
 
   CacheFailure({required this.message});
 }
+class InputInvalidFailure extends Failure {
+  final String message;
+
+  InputInvalidFailure({required this.message});
+}
 

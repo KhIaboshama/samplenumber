@@ -5,6 +5,7 @@ import 'package:samplenumber/features/number_trivia/domain/entity/number_trivia.
 import 'package:samplenumber/features/number_trivia/domain/usecase/get_concrete_number_trivia_usecase.dart';
 import 'package:samplenumber/features/number_trivia/domain/usecase/get_random_number_trivia_usecase.dart';
 
+import '../../../../core/util/input_converter.dart';
 import '../../domain/repository/number_trivia_repository.dart';
 
 part 'number_trivia_event.dart';
@@ -17,22 +18,29 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
     on<GetConcreteNumberEvent>(
       (event, emit) async {
         try {
-          final number = int.parse(event.number);
+          final result = convertToInt(event.number);
           emit(NumberTriviaLoadingState());
-          final response =
-              await GetConcreteNumberTriviaUsecase(repository: repository)
-                  .call(ConcreteNumberTriviaParam(number));
-          if (response.isLeft) {
-            emit(NumberTriviaLoadedState(numberTrivia: response.left));
-          } else {
-            if (response.right is ServerFailure) {
-              emit(NumberTriviaErrorState(
-                  message: (response.right as ServerFailure).message));
-            } else if (response.right is CacheFailure) {
-              emit(NumberTriviaErrorState(
-                  message: (response.right as CacheFailure).message));
-            }
-          }
+         await result.fold(
+            (number) async {
+              final response =
+                  await GetConcreteNumberTriviaUsecase(repository: repository)
+                      .call(ConcreteNumberTriviaParam(number));
+              if (response.isLeft) {
+                emit(NumberTriviaLoadedState(numberTrivia: response.left));
+              } else {
+                if (response.right is ServerFailure) {
+                  emit(NumberTriviaErrorState(
+                      message: (response.right as ServerFailure).message));
+                } else if (response.right is CacheFailure) {
+                  emit(NumberTriviaErrorState(
+                      message: (response.right as CacheFailure).message));
+                }
+              }
+            },
+            (failure) async => emit(
+              NumberTriviaErrorState(message: failure.message),
+            ),
+          );
         } on Exception {
           emit(NumberTriviaErrorState(message: 'input invalid format'));
         }
