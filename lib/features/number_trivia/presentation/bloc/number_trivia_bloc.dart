@@ -15,22 +15,26 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   NumberTriviaBloc(this.repository) : super(NumberTriviaInitialState()) {
     on<GetConcreteNumberEvent>(
       (event, emit) async {
-        emit(NumberTriviaLoadingState());
-        final response =
-            await GetConcreteNumberTriviaUsecase(repository: repository)
-                .call(ConcreteNumberTriviaParam(
-          event.number,
-        ));
-        if (response.isLeft) {
-          emit(NumberTriviaLoadedState(numberTrivia: response.left));
-        } else {
-          if (response.right is ServerFailure) {
-            emit(NumberTriviaErrorState(
-                message: (response.right as ServerFailure).message));
-          } else if (response.right is CacheFailure) {
-            emit(NumberTriviaErrorState(
-                message: (response.right as CacheFailure).message));
+        try {
+          final number = int.parse(event.number);
+          emit(NumberTriviaLoadingState());
+          final response =
+              await GetConcreteNumberTriviaUsecase(repository: repository).call(
+            ConcreteNumberTriviaParam(number),
+          );
+          if (response.isLeft) {
+            emit(NumberTriviaLoadedState(numberTrivia: response.left));
+          } else {
+            if (response.right is ServerFailure) {
+              emit(NumberTriviaErrorState(
+                  message: (response.right as ServerFailure).message));
+            } else if (response.right is CacheFailure) {
+              emit(NumberTriviaErrorState(
+                  message: (response.right as CacheFailure).message));
+            }
           }
+        } on Exception {
+          emit(NumberTriviaErrorState(message: 'input invalid format'));
         }
       },
     );

@@ -8,7 +8,7 @@ part of 'number_trivia_model.dart';
 
 NumberTriviaModel _$NumberTriviaModelFromJson(Map<String, dynamic> json) =>
     NumberTriviaModel(
-      description: json['description'] as String,
+      description: json['text'] as String,
     );
 
 Map<String, dynamic> _$NumberTriviaModelToJson(NumberTriviaModel instance) =>

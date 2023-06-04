@@ -4,7 +4,7 @@ part of 'number_trivia_bloc.dart';
 abstract class NumberTriviaEvent {}
 
 class GetConcreteNumberEvent extends NumberTriviaEvent {
-  final int number;
+  final String number;
 
   GetConcreteNumberEvent({required this.number});
 }
