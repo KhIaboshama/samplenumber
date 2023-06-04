@@ -5,14 +5,14 @@ part 'number_trivia_model.g.dart';
 
 @JsonSerializable()
 class NumberTriviaModel extends Equatable {
-  final String description;
+  final String text;
 
   const NumberTriviaModel({
-    required this.description,
+    required this.text,
   });
 
   @override
-  List<Object?> get props => [description];
+  List<Object?> get props => [text];
 
   factory NumberTriviaModel.fromJson(Map<String, dynamic> json) =>
       _$NumberTriviaModelFromJson(json);

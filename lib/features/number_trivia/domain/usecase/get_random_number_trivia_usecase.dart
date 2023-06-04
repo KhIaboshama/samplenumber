@@ -18,7 +18,7 @@ class GetRandomNumberTriviaUsecase extends Usecase<NumberTrivia, NoParams> {
     final response = await repository.getRandomNumberTrivia();
     if (response.isLeft) {
       return Left(toNumberTrivia(
-          response.left, int.parse(response.left.description.split("")[0])));
+          response.left, int.parse(response.left.text.split("")[0])));
     } else {
       if (response.right is ServerException) {
         return Right(ServerFailure(

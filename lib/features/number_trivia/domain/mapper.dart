@@ -3,6 +3,6 @@ import 'package:samplenumber/features/number_trivia/domain/entity/number_trivia.
 
 NumberTrivia toNumberTrivia(NumberTriviaModel numberTriviaModel, int number) =>
     NumberTrivia(
-      description: numberTriviaModel.description,
+      description: numberTriviaModel.text,
       number: number,
     );
