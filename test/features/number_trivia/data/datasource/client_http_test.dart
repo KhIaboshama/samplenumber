@@ -62,4 +62,40 @@ void main() {
     expect(result.right,
         equals(const ServerException(message: somethingWentWrongErrorMessage)));
   });
+  test('random success response', () async {
+    final url = Uri.parse(
+        numberTriviaRemoteDataSource.getNumberRandomTriviaUrl());
+    var body = await fixture('number_trivia.json');
+    var bodyString = fixtureString('number_trivia.json');
+    //
+    var response = MockMockResponse();
+    when(response.statusCode).thenReturn(200);
+    when(response.body).thenReturn(body.toString());
+    when(client.get(url, headers: {"Content-Type": "application/json"}))
+        .thenAnswer((_) async => response);
+    await numberTriviaRemoteDataSource.getRandomNumberTrivia();
+    verify(client.get(url, headers: {"Content-Type": "application/json"}));
+    //
+    var bodyStringResponse = MockMockResponse();
+    when(bodyStringResponse.statusCode).thenReturn(200);
+    when(bodyStringResponse.body).thenReturn(bodyString);
+    when(client.get(url, headers: {"Content-Type": "application/json"}))
+        .thenAnswer((_) async => bodyStringResponse);
+    await numberTriviaRemoteDataSource.getRandomNumberTrivia();
+    verify(client.get(url, headers: {"Content-Type": "application/json"}));
+  });
+  test('random failure response', () async {
+    final url = Uri.parse(
+        numberTriviaRemoteDataSource.getNumberRandomTriviaUrl());
+    //
+    var response = MockMockResponse();
+    when(response.statusCode).thenReturn(404);
+    when(client.get(url, headers: {"Content-Type": "application/json"}))
+        .thenAnswer((_) async => response);
+    final result =
+        await numberTriviaRemoteDataSource.getRandomNumberTrivia();
+    verify(client.get(url, headers: {"Content-Type": "application/json"}));
+    expect(result.right,
+        equals(const ServerException(message: somethingWentWrongErrorMessage)));
+  });
 }
