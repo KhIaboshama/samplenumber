@@ -76,4 +76,20 @@ class MockMockNumberTriviaRemoteDataSource extends _i1.Mock
               ),
             )),
           ) as _i4.Future<_i2.Either<_i5.NumberTriviaModel, Exception>>);
+  @override
+  String getNumberConcreteTriviaUrl(int? number) => (super.noSuchMethod(
+        Invocation.method(
+          #getNumberConcreteTriviaUrl,
+          [number],
+        ),
+        returnValue: '',
+      ) as String);
+  @override
+  String getNumberRandomTriviaUrl() => (super.noSuchMethod(
+        Invocation.method(
+          #getNumberRandomTriviaUrl,
+          [],
+        ),
+        returnValue: '',
+      ) as String);
 }

@@ -18,7 +18,7 @@ void main() {
   late MockMockNumberTriviaRemoteDataSource mock;
   NumberTriviaModel numberTriviaModel =
       const NumberTriviaModel(text: 'success');
-  final serverException =
+  const serverException =
       ServerException(message: somethingWentWrongErrorMessage);
   setUp(() {
     mock = MockMockNumberTriviaRemoteDataSource();
@@ -52,7 +52,7 @@ void main() {
   });
   test('returns exception when getting random http response is failure', () async {
     when(mock.getRandomNumberTrivia())
-        .thenAnswer((_) async => Right(serverException));
+        .thenAnswer((_) async => const Right(serverException));
 
     final response = await mock.getRandomNumberTrivia();
     expect(response.right, serverException);

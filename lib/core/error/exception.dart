@@ -1,11 +1,19 @@
-class ServerException implements Exception {
+import 'package:equatable/equatable.dart';
+
+class ServerException extends Equatable implements Exception {
   final String message;
 
-  ServerException({required this.message});
+  const ServerException({required this.message});
+
+  @override
+  List<Object?> get props => [message];
 }
 
-class CacheException implements Exception {
+class CacheException extends Equatable implements Exception {
   final String message;
 
-  CacheException({required this.message});
+  const CacheException({required this.message});
+
+  @override
+  List<Object?> get props => [message];
 }
