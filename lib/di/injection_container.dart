@@ -1,5 +1,6 @@
 
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart';
 import 'package:samplenumber/features/number_trivia/data/datasource/number_trivia_remote_data_source.dart';
 import 'package:samplenumber/features/number_trivia/data/repository_impl/number_trivia_repository_impl.dart';
 import 'package:samplenumber/features/number_trivia/domain/repository/number_trivia_repository.dart';
@@ -16,7 +17,9 @@ void init() {
       () => NumberTriviaRepositoryImpl(remoteDataSource: serviceLocator()));
 
   serviceLocator.registerLazySingleton<NumberTriviaRemoteDataSource>(
-      () => NumberTriviaRemoteDataSourceImpl());
+      () => NumberTriviaRemoteDataSourceImpl(client: serviceLocator()));
+
+  serviceLocator.registerLazySingleton<Client>(() => Client());
 
   serviceLocator.registerLazySingleton<GetConcreteNumberTriviaUsecase>(
       () => GetConcreteNumberTriviaUsecase(repository: serviceLocator()));
