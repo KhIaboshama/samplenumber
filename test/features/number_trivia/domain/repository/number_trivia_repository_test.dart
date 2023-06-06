@@ -9,6 +9,7 @@ import 'package:samplenumber/features/number_trivia/domain/repository/number_tri
 
 import 'number_trivia_repository_test.mocks.dart';
 
+
 class MockNumberTriviaRepository extends Mock
     implements NumberTriviaRepository {}
 
@@ -17,7 +18,7 @@ void main() {
   late MockMockNumberTriviaRepository repository;
   NumberTriviaModel numberTriviaModel =
       const NumberTriviaModel(text: 'success');
-  final serverException =
+  const serverException =
       ServerException(message: somethingWentWrongErrorMessage);
 
   setUp(() {
