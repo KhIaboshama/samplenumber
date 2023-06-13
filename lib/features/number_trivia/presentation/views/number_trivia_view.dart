@@ -210,6 +210,8 @@ class _NumberTriviaViewState extends State<NumberTriviaView> {
       PushNotification notification = PushNotification(
         title: initialMessage.notification?.title,
         body: initialMessage.notification?.body,
+        dataTitle: initialMessage.data['title'],
+        dataBody: initialMessage.data['body'],
       );
       setState(() {
         _notificationInfo = notification;
